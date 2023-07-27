@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -8,12 +10,12 @@ public class Main {
         System.out.println();
 
         while (true){
-            int angka1 = cekInputInteger("pertama");
-            int angka2 = cekInputInteger("kedua");
+            int angka1 = cekInputInteger("pertama"); // Untuk memberikan value bilangan pertama
+            int angka2 = cekInputInteger("kedua"); // Untuk memberikan value bilangan kedua
 
             System.out.printf("Hasil %.2f\n", hitung(angka1, angka2));
 
-            // Untuk memberika user pilihan untuk keluar program atau tidak
+            // Untuk memberikan user pilihan untuk keluar program atau tidak
             System.out.print("Apa kamu ingin keluar (Y/n): ");
             String pilih = scanner.next();
             if(pilih.equals("Y")){
@@ -29,17 +31,17 @@ public class Main {
     }
     // Fungsi untuk mengecek tipe data yang diinput oleh user berupa integer atau tidak
     public static int cekInputInteger(String urutanBilangan){
-        int angka;
+        int angka =0;
 
         while (true){
-            System.out.print("Masukkan angka " + urutanBilangan + ": ");
+            System.out.print("Masukkan angka " + urutanBilangan + ": "); // Print berdasarkan parameternya
             try {
                 angka = scanner.nextInt();
                 break; // Jika input berupa bilangan bulat, keluar dari loop
-            }catch (Exception e){
-                textError("Input tidak sesuai, tolong masukkan bilangan bulat");
-                scanner.next(); // Untuk membersihkan buffer scanner
+            } catch (InputMismatchException e) {
+                textError("Maaf, input yang ada masukkan tidak valid");
             }
+            scanner.next(); // Untuk membersihkan buffer scanner
         }
         return angka;
     }
@@ -66,7 +68,7 @@ public class Main {
                     case "/":
                         while (true){
                             if(angka2 == 0){
-                                textError("Tidak dapat dibagi 0");
+                                textError("Tidak dapat melakukan pembagian dengan nol");
                                 System.out.print("Masukkan bilangan kedua: ");
                                 angka2 = scanner.nextInt();
                             }
